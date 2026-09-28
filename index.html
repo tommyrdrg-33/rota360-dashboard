@@ -1,98 +1,57 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1220">
-<title>Rota360 — Dashboard Operacional</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rota360 — Dashboard Interativo</title>
+<meta name="description" content="Dashboard oficial do projeto Rota360 — inteligência e eficiência na última milha.">
 <style>
-:root{--bg:#09101d;--panel:#111a2b;--soft:#182338;--line:#26344f;--text:#eef4ff;--muted:#95a6c5;--blue:#58a6ff;--green:#7ee787;--yellow:#f2cc60}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#08101c,#0d1626);color:var(--text);font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-.wrap{max-width:1480px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:20px}
-.brand small{color:var(--green);font-weight:800;letter-spacing:.14em;text-transform:uppercase}.brand h1{margin:4px 0;font-size:30px}.brand p,.muted{color:var(--muted);margin:0}.status{text-align:right;color:var(--muted);font-size:12px}
-.filters{display:grid;grid-template-columns:180px 1fr auto;gap:10px;margin-bottom:14px}.filters select,.filters input,.filters button{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:10px}.filters button{cursor:pointer}
-.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:10px}.accent{color:var(--green)}
-.kpis{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:16px}.kpi,.card{background:var(--panel);border:1px solid var(--line);border-radius:15px}.kpi{padding:14px}.kpi span{color:var(--muted);font-size:12px;display:block}.kpi strong{font-size:23px;display:block;margin-top:7px}
-.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-bottom:16px}.card{padding:18px}.card h2{font-size:16px;margin:0 0 14px}.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.bar-row{display:grid;grid-template-columns:70px 1fr 70px;gap:8px;align-items:center;margin:8px 0}.bar-label,.bar-value{font-size:11px;color:var(--muted)}.bar-value{text-align:right}.bar-track{height:8px;background:var(--soft);border-radius:99px;overflow:hidden}.bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green))}
-.latest-head{display:flex;justify-content:space-between;gap:10px}.latest-head span,.latest-grid span{display:block;color:var(--muted);font-size:11px}.latest-head h3{margin:3px 0 12px;font-size:20px}.latest-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0 16px}.latest-grid>div{background:var(--soft);padding:10px;border-radius:10px}.latest-grid b{font-size:18px}
-.icr-item{margin:12px 0}.icr-item>div:first-child{display:flex;justify-content:space-between}.icr-item span{color:var(--muted)}.icr-track{height:8px;background:var(--soft);border-radius:99px;overflow:hidden;margin-top:5px}.icr-track div{height:100%;background:var(--yellow)}
-.notes{color:var(--muted);padding-left:18px}.table-wrap{overflow:auto;max-height:620px}table{width:100%;border-collapse:collapse;min-width:1050px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{position:sticky;top:0;background:#121d30;color:#bdc9df;font-size:11px;z-index:2}td{font-size:12px}.pill{background:#1a2a43;color:#a9c8ff;padding:3px 8px;border-radius:99px;display:inline-block}.wide{min-width:260px}.footer{color:var(--muted);font-size:11px;margin:18px 2px}
-@media(max-width:1050px){.kpis{grid-template-columns:repeat(4,1fr)}.grid,.charts{grid-template-columns:1fr}}@media(max-width:650px){.wrap{padding:14px}.top{flex-direction:column;align-items:start}.status{text-align:left}.filters{grid-template-columns:1fr}.kpis{grid-template-columns:repeat(2,1fr)}.latest-grid{grid-template-columns:repeat(2,1fr)}}
+:root{--bg:#070b1a;--panel:#0e1630;--panel2:#111d3d;--text:#eef3ff;--muted:#9eacd0;--purple:#8b5cf6;--blue:#3b82f6;--cyan:#22d3ee;--green:#34d399;--amber:#fbbf24;--red:#fb7185;--border:#23345f;--shadow:0 18px 55px rgba(0,0,0,.25)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at 20% 0,#172554 0,#090d1e 38%,#050814 100%);color:var(--text)}
+.app{max-width:1500px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}.brand h1{margin:0;font-size:34px;letter-spacing:-1px}.brand p{margin:6px 0 0;color:var(--muted)}.stamp{padding:10px 14px;border:1px solid var(--border);border-radius:14px;background:#0b132b;color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 22px}.tab{border:1px solid var(--border);background:#0c1430;color:#cbd5f5;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}.tab.active{background:linear-gradient(135deg,var(--purple),var(--blue));border-color:transparent;color:#fff}
+.view{display:none}.view.active{display:block}.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(6,minmax(140px,1fr))}.card{background:linear-gradient(180deg,rgba(17,29,61,.94),rgba(10,17,38,.94));border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.8px}.kpi .value{font-size:28px;font-weight:850;margin-top:7px}.kpi .sub{font-size:12px;color:var(--muted);margin-top:4px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}select,input{background:#091229;border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px}.two{grid-template-columns:1.3fr .7fr}.three{grid-template-columns:repeat(3,1fr)}h2{margin:0 0 14px;font-size:20px}h3{margin:0 0 8px;font-size:16px}.muted{color:var(--muted)}.small{font-size:12px}.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;border:1px solid var(--border);background:#101c3b}.badge.new{background:rgba(139,92,246,.22);border-color:#7c3aed;color:#ddd6fe}.badge.ok{color:#a7f3d0;border-color:#166534;background:#052e2b}.badge.warn{color:#fde68a;border-color:#854d0e;background:#2c1d05}
+.tablewrap{overflow:auto;border-radius:16px;border:1px solid var(--border)}table{width:100%;border-collapse:collapse;min-width:1100px;background:#091229}th,td{padding:11px 12px;border-bottom:1px solid #1d2b4e;text-align:left;font-size:13px;vertical-align:top}th{position:sticky;top:0;background:#101a38;color:#b8c5e8;z-index:1}tr:hover td{background:#0d1834}.num{text-align:right}.clickable{cursor:pointer}
+.chart{height:330px;display:flex;align-items:flex-end;gap:7px;padding:22px 10px 36px;border-top:1px solid var(--border);position:relative}.bar{flex:1;min-width:18px;background:linear-gradient(180deg,var(--purple),var(--blue));border-radius:8px 8px 2px 2px;position:relative;opacity:.88}.bar:hover{opacity:1}.bar span{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--muted);white-space:nowrap}.bar b{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:10px}
+.analysis-card{border-left:4px solid var(--purple)}.analysis-card.blue{border-left-color:var(--blue)}.analysis-card p{line-height:1.55;color:#c8d3f0}.callout{padding:14px;border-radius:14px;background:#0a1b35;border:1px solid #27457a;color:#dbeafe}.warning{background:#2a2008;border-color:#7c5b13;color:#fef3c7}
+.citycards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}.citycard{cursor:pointer;transition:.18s}.citycard:hover{transform:translateY(-2px);border-color:#4d66a2}.metricrow{display:flex;justify-content:space-between;margin:8px 0;color:#cbd5e1}.metricrow span:first-child{color:var(--muted)}
+.timeline{display:grid;gap:10px}.step{display:grid;grid-template-columns:170px 1fr 120px;gap:12px;align-items:center;padding:12px;border:1px solid var(--border);border-radius:12px;background:#0a132a}.status{text-align:center;padding:6px 8px;border-radius:999px;background:#12213f;font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(2,6,23,.78);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.open{display:flex}.modalbox{max-width:950px;width:100%;max-height:88vh;overflow:auto;background:#0c1530;border:1px solid #344b7a;border-radius:20px;padding:22px;box-shadow:0 30px 90px #000}.close{float:right;background:#121e3d;color:white;border:1px solid var(--border);border-radius:10px;padding:8px 12px;cursor:pointer}
+.footer{margin:24px 0 8px;color:var(--muted);font-size:12px;text-align:center}.legend{display:flex;gap:10px;flex-wrap:wrap}.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:5px}.measured{background:var(--green)}.derived{background:var(--blue)}.estimated{background:var(--amber)}.icrbar{height:10px;border-radius:999px;background:#0a132a;overflow:hidden;margin-top:8px}.icrbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan))}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three{grid-template-columns:1fr}.step{grid-template-columns:1fr}}@media(max-width:640px){.app{padding:14px}header{display:block}.stamp{margin-top:12px}.kpis{grid-template-columns:repeat(2,1fr)}.brand h1{font-size:28px}}
 </style>
 </head>
-<body>
-<div class="wrap">
-<header class="top">
-  <div class="brand"><small>Rota360</small><h1>Dashboard Operacional</h1><p>Inteligência e eficiência na última milha</p></div>
-  <div class="status">Base oficial consolidada até 27/09/2026<br>ICR360 v0.1 em validação</div>
-</header>
-
-<section class="filters">
-  <select id="phase"><option value="">Todas as fases</option><option>Fase 1</option><option>Fase 2</option><option>Fase 3</option></select>
-  <input id="search" placeholder="Filtrar por cidade, problema ou evidência…">
-  <button id="reset">Limpar filtros</button>
-</section>
-<div class="meta"><span id="count"></span><span class="accent">Dashboard oficial Rota360</span></div>
-
-<section class="kpis" id="kpis"></section>
-
-<section class="grid">
-  <article class="card"><h2>Série operacional recente</h2><div class="charts"><div><h2>Produtividade bruta</h2><div id="prod"></div></div><div><h2>Km documentados</h2><div id="km"></div></div></div></article>
-  <article class="card" id="latest"></article>
-</section>
-
-<section class="grid">
-  <article class="card"><h2>ICR360 — composição provisória</h2><div id="icr"></div></article>
-  <article class="card"><h2>Regras de leitura</h2><ul class="notes"><li>Km/parada e paradas/hora não classificam qualidade isoladamente.</li><li>Ruralidade, distância de acesso e transferências necessárias são contexto.</li><li>O score numérico do ICR360 ainda não é publicado.</li></ul></article>
-</section>
-
-<section class="card">
-<h2>Banco de rotas</h2>
-<div class="table-wrap"><table><thead><tr><th>Data</th><th>Região</th><th>Paradas</th><th>Pacotes</th><th>Km</th><th>Paradas/h</th><th>Revisitas</th><th>Fase</th><th>Problema principal</th></tr></thead><tbody id="rows"></tbody></table></div>
-</section>
-
-<p class="footer">O painel distingue dado medido, indicador derivado, hipótese, dificuldade natural da rota e fatores externos. Atualizações futuras são publicadas por novos commits neste mesmo projeto.</p>
+<body><div class="app">
+<header><div class="brand"><h1>Rota360</h1><p>Inteligência e eficiência na última milha • evidência de campo → análise → validação</p></div><div class="stamp">Atualizado em <b id="updated">—</b><br>Período: <span id="period">—</span></div></header>
+<nav class="tabs">
+<button class="tab active" data-view="overview">Visão Geral</button><button class="tab" data-view="routes">Rotas</button><button class="tab" data-view="cities">Cidades</button><button class="tab" data-view="patterns">Padrões & Análises</button><button class="tab" data-view="cases">Casos de Estudo</button><button class="tab" data-view="icr360">ICR360</button><button class="tab" data-view="roadmap">Roadmap</button><button class="tab" data-view="database">Base de Dados</button>
+</nav>
+<section id="overview" class="view active">
+<div class="grid kpis" id="kpis"></div>
+<div class="grid two" style="margin-top:14px"><div class="card"><h2>Produtividade bruta por rota</h2><p class="muted small">Compare sempre com densidade, ruralidade, janelas e deslocamentos.</p><div id="prodChart" class="chart"></div></div><div class="card"><h2>Leitura do conjunto</h2><div id="overviewText"></div></div></div>
+<div class="grid three" style="margin-top:14px">
+<div class="card analysis-card"><span class="badge new">CASO POSITIVO • 24/09</span><h2 style="margin-top:10px">Quando a área criada funciona</h2><p><b>48 paradas / 76 pacotes</b>, 100% concluída, zero reorganizações e sem cruzamento territorial relevante.</p><div class="callout">Devolução com 23 pacotes na parada 1 contou como atendimento normal, não como insucesso.</div></div>
+<div class="card analysis-card blue"><span class="badge new">EVIDÊNCIA • 26/09</span><h2 style="margin-top:10px">Área útil ≠ sequência interna ideal</h2><p><b>52 paradas / 59 pacotes</b>, 100% concluída e zero reorganizações. Holambra foi concluída antes dos clusters densos de Jaguariúna.</p><div class="callout warning">Km/parada bruto não representa dispersão local quando a maior parte do deslocamento é transferência entre cidades.</div></div>
+<div class="card analysis-card"><span class="badge new">FASE 3 • 27/09</span><h2 style="margin-top:10px">Continuidade territorial validada</h2><p><b>97 paradas / 128 pacotes</b>, 8 áreas e <b>zero revisitas</b>. A execução Jaguariúna → Pedreira → Holambra respeitou o corredor real de acesso.</p><div class="callout"><b>Evidência forte:</b> paradas 3 e 55 na mesma rua; 73–75 geolocalizadas cerca de 10 km fora do endereço correto.</div></div>
 </div>
-
-<script>
-const R=[
-["2026-09-03","Casa Branca",109,null,null,18.74,null,"Fase 1","Dispersão numérica x geográfica","Duplicidade da parada 32 e posições ausentes"],
-["2026-09-03","Aguaí / São João da Boa Vista",102,121,null,null,null,"Fase 1","Fragmentação entre municípios e janelas","Retorno a Aguaí após antecipar São João; ~1h perdida"],
-["2026-09-05","Itapira",156,217,null,18.17,4,"Fase 1","Sobreposição de áreas e repetição territorial","4 de 5 áreas percorridas duas vezes"],
-["2026-09-06","Casa Branca / Venda Branca / Lagoa Branca",125,154,null,null,null,"Fase 1","Mistura de blocos e rotas brancas","Paradas 14.1 e 14.2 inseridas após roteirização"],
-["2026-09-09","Mogi Guaçu / Aguaí",96,113,117.5,16.46,0,"Fase 1","A-B-A com pedágios extras","Sequência numérica adicionaria ~59 km e 2 pedágios"],
-["2026-09-10","Venda Branca / Lagoa Branca / Casa Branca / Itobi",81,102,null,17.05,null,"Fase 1","Fragmentação intermunicipal","5 insucessos registrados"],
-["2026-09-11","Amparo / Monte Alegre do Sul / Serra Negra",83,88,null,null,null,"Fase 1","Fragmentação de Amparo em três blocos","Amparo interrompido por outros municípios"],
-["2026-09-12","Casa Branca / Itobi",97,null,null,null,null,"Fase 1","Bloco inicial espalhado","Paradas 1–9 reinseridas por proximidade"],
-["2026-09-13","São Sebastião da Grama",129,165,139,22.24,null,"Fase 1","Sequência com inserções e agência dominical","Agência em rota branca fechada no domingo"],
-["2026-09-15","São João da Boa Vista",93,125,147,18.60,null,"Fase 1","Baixa coerência dos blocos e sobreposição","Agrupamento melhor somente a partir de ~70"],
-["2026-09-17","Socorro / Serra Negra / Lindóia",47,55,139,10.85,null,"Fase 1","Sentido original incompatível com acesso real","60 km até 1ª + 79 km até última"],
-["2026-09-17","São João da Boa Vista",69,91,null,null,null,"Fase 1","Travessias repetidas de rodovia","93 posições para 69 paradas; 5 travessias previstas"],
-["2026-09-18","Casa Branca",108,132,123.4,19.46,0,"Fase 2","Ordem de zonas com retorno potencial","Redesenho em 4 zonas terminou sem revisitas"],
-["2026-09-19","Casa Branca",135,194,118,20.25,3,"Fase 2","Mistura numérica + bloqueios no centro","Retorno ao centro 3 vezes"],
-["2026-09-20","Casa Branca",136,168,131.8,25.50,0,"Fase 2","Risco de retrabalho territorial","Blocos A→B→C; cada bloco uma vez"],
-["2026-09-21","Casa Branca",99,125,144.4,18.68,0,"Fase 2","Fragmentação numérica","Paradas 28 e 71 na mesma rua; zero revisitas"],
-["2026-09-22","São João da Boa Vista / Águas da Prata",66,125,162.5,18.59,0,"Fase 2","Rota em C atravessava região sem concluir","Ferradura; zero retorno a áreas repetidas"],
-["2026-09-23","Rota urbana - 2 zonas",77,null,null,null,null,"Fase 2","Baixa correspondência entre ordem e proximidade","Paradas 2 e 57 na mesma rua, nº 230 e 200"],
-["2026-09-24","São João da Boa Vista / Águas da Prata",48,76,null,14.77,null,"Fase 2","Trechos curtos misturados à sequência","Devolução de 23 pacotes na primeira parada"],
-["2026-09-27","Jaguariúna / Pedreira / Holambra",97,128,117.9,13.38,0,"Fase 3","Sequência intermunicipal invertida + dispersão + geolocalização","Paradas 3 e 55 na mesma rua; 73–75 ~10 km incorretas"]
-];
-const I=[["Continuidade Territorial",30],["Eficiência de Transição",25],["Manipulação de Carga",20],["Proteção de Janelas",15],["Sucesso atribuível à roteirização",10]];
-const $=s=>document.querySelector(s), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-const br=d=>new Date(d+"T12:00:00").toLocaleDateString("pt-BR"), fmt=(n,d=0)=>n==null?"—":Number(n).toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d});
-function filt(){const p=$("#phase").value,q=$("#search").value.toLowerCase().trim();return R.filter(r=>(!p||r[7]===p)&&(!q||[r[1],r[8],r[9]].join(" ").toLowerCase().includes(q)))}
-function med(v){v=v.filter(x=>x!=null).sort((a,b)=>a-b);if(!v.length)return null;let m=Math.floor(v.length/2);return v.length%2?v[m]:(v[m-1]+v[m])/2}
-function bars(rs,idx,id,suf){let a=rs.filter(r=>r[idx]!=null).slice(-12),mx=Math.max(1,...a.map(r=>r[idx]));$(id).innerHTML=a.map(r=>`<div class="bar-row"><div class="bar-label">${br(r[0])}</div><div class="bar-track"><div class="bar-fill" style="width:${r[idx]/mx*100}%"></div></div><div class="bar-value">${fmt(r[idx],1)}${suf}</div></div>`).join("")}
-function render(){let rs=filt(),sum=i=>rs.reduce((a,r)=>a+(r[i]||0),0),zero=rs.filter(r=>r[6]===0).length;
-let k=[["Rotas",rs.length,""],["Paradas",sum(2),""],["Pacotes",sum(3),""],["Km documentados",sum(4)," km"],["Zero revisitas",zero,""],["Mediana bruta",med(rs.map(r=>r[5]))," paradas/h"],["Fase 3",rs.filter(r=>r[7]==="Fase 3").length,""]];
-$("#kpis").innerHTML=k.map((x,i)=>`<article class="kpi"><span>${x[0]}</span><strong>${fmt(x[1],i===3||i===5?1:0)}${x[2]}</strong></article>`).join("");
-bars(rs,5,"#prod","/h");bars(rs,4,"#km"," km");$("#count").textContent=rs.length+" de "+R.length+" registros";
-let l=[...rs].sort((a,b)=>b[0].localeCompare(a[0]))[0];$("#latest").innerHTML=l?`<div class="latest-head"><div><span>Última rota</span><h3>${esc(l[1])}</h3></div><strong>${br(l[0])}</strong></div><div class="latest-grid"><div><span>Paradas</span><b>${fmt(l[2])}</b></div><div><span>Pacotes</span><b>${fmt(l[3])}</b></div><div><span>Km</span><b>${fmt(l[4],1)}</b></div><div><span>Revisitas</span><b>${fmt(l[6])}</b></div></div><p><strong>Problema:</strong> ${esc(l[8])}</p><p><strong>Evidência:</strong> ${esc(l[9])}</p>`:"";
-$("#rows").innerHTML=[...rs].reverse().map(r=>`<tr><td>${br(r[0])}</td><td>${esc(r[1])}</td><td>${fmt(r[2])}</td><td>${fmt(r[3])}</td><td>${fmt(r[4],1)}</td><td>${fmt(r[5],1)}</td><td>${fmt(r[6])}</td><td><span class="pill">${r[7]}</span></td><td class="wide">${esc(r[8])}</td></tr>`).join("")}
-$("#icr").innerHTML=I.map(x=>`<div class="icr-item"><div><strong>${x[0]}</strong><span>${x[1]}%</span></div><div class="icr-track"><div style="width:${x[1]}%"></div></div></div>`).join("");
-$("#phase").onchange=render;$("#search").oninput=render;$("#reset").onclick=()=>{$("#phase").value="";$("#search").value="";render()};render();
-</script>
-<!-- deploy trigger: 2026-09-28 -->
-</body>
-</html>
+</section>
+<section id="routes" class="view"><div class="card"><h2>Rotas registradas</h2><div class="toolbar"><select id="routeCityFilter"></select><select id="routePhaseFilter"><option value="all">Todas as fases</option><option>Fase 1</option><option>Fase 2</option><option>Fase 3</option></select><select id="routeStatusFilter"><option value="all">Todos os status</option><option value="100">Somente 100%</option><option value="new">Novas análises</option></select><input id="routeSearch" placeholder="Buscar cidade, estratégia ou evidência"></div><div id="routesTable"></div></div></section>
+<section id="cities" class="view"><div class="card"><h2>Visão por cidade / corredor</h2><p class="muted">Clique em um cartão para filtrar as rotas daquele corredor.</p><div id="cityCards" class="citycards"></div></div></section>
+<section id="patterns" class="view"><div class="grid three">
+<div class="card"><h2>1. Dispersão numérica × geográfica</h2><p class="muted">Paradas numericamente distantes podem estar na mesma rua ou microrregião.</p></div><div class="card"><h2>2. Fragmentação A–B–A</h2><p class="muted">Uma região pode ser iniciada, interrompida e retomada, gerando transições extras.</p></div><div class="card"><h2>3. Área × sequência</h2><p class="muted">A área pode ser útil enquanto a ordem interna ainda exige ajuste operacional.</p></div><div class="card"><h2>4. Janelas e prioridade</h2><p class="muted">Agências e comércios precisam de proteção por horário e calendário.</p></div><div class="card"><h2>5. Organização do baú</h2><p class="muted">Reorganizações são medidas em quantidade e minutos, com análise de causalidade.</p></div><div class="card"><h2>6. Geolocalização</h2><p class="muted">Erro de pin/endereço é separado de erro de sequência; 27/09 trouxe evidência objetiva.</p></div>
+</div><div class="card" style="margin-top:14px"><h2>Regra metodológica da Fase 3</h2><div class="callout warning">Separar <b>quilometragem de acesso/transferência</b> da <b>quilometragem de distribuição</b>. Ruralidade, distância SVC→1ª e transferências necessárias são contexto, não penalização automática.</div></div></section>
+<section id="cases" class="view"><div class="grid two" id="caseCards"></div></section>
+<section id="icr360" class="view"><div class="grid two"><div class="card"><span class="badge new">FASE 3 • v0.1</span><h2 style="margin-top:10px">ICR360 — Índice de Coerência da Rota</h2><p class="muted">O índice está em validação e ainda não publica nota final.</p><div id="icrList"></div></div><div class="card"><h2>O que fica fora da nota direta</h2><div class="callout">Ruralidade • distância SVC→1ª • transferência intermunicipal necessária • pacotes/parada • chuva • eventos • bloqueios • ausência do destinatário • erros cadastrais/geográficos.</div><h2 style="margin-top:18px">Caso de referência — 27/09</h2><p><b>8 áreas / zero revisitas</b> após a inversão do eixo macro para Jaguariúna → Pedreira → Holambra.</p><p class="muted small">Evidência qualitativa forte para Continuidade Territorial e Eficiência de Transição.</p></div></div></section>
+<section id="roadmap" class="view"><div class="card"><h2>Roadmap</h2><div class="timeline">
+<div class="step"><b>Fase 1 — Captação</b><span>Formação da base inicial e padronização dos campos.</span><span class="status">Consolidada</span></div>
+<div class="step"><b>Fase 2 — Padrões</b><span>Recorrência de fragmentação, revisitas, janelas e reorganizações.</span><span class="status">Consolidada</span></div>
+<div class="step"><b>Fase 3 — Comparação</b><span>ICR360 v0.1, causalidade e separação entre contexto e qualidade da roteirização.</span><span class="status">Em andamento</span></div>
+<div class="step"><b>Fase 4 — Pilotos</b><span>Comparações em condições semelhantes e ampliação dos testes.</span><span class="status">Planejado</span></div>
+<div class="step"><b>Fase 5 — Proposta</b><span>Regras, ganhos, limites e requisitos de implementação.</span><span class="status">Planejado</span></div>
+</div></div></section>
+<section id="database" class="view"><div class="card"><h2>Base de dados completa</h2><div class="legend"><span><i class="dot measured"></i>Medido</span><span><i class="dot derived"></i>Derivado</span><span><i class="dot estimated"></i>Estimado / hipótese</span></div><p class="muted small">Clique em uma linha para abrir os detalhes completos.</p><div id="dbTable"></div></div></section>
+<div class="footer">Rota360 • dashboard oficial • Fase 3 ativa • atualização por versionamento no GitHub</div>
+</div>
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">Fechar</button><div id="modalContent"></div></div></div>
+<script src="data.js"></script><script src="app.js"></script>
+</body></html>
