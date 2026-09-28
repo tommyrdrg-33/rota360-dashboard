@@ -93,5 +93,6 @@ $("#rows").innerHTML=[...rs].reverse().map(r=>`<tr><td>${br(r[0])}</td><td>${esc
 $("#icr").innerHTML=I.map(x=>`<div class="icr-item"><div><strong>${x[0]}</strong><span>${x[1]}%</span></div><div class="icr-track"><div style="width:${x[1]}%"></div></div></div>`).join("");
 $("#phase").onchange=render;$("#search").oninput=render;$("#reset").onclick=()=>{$("#phase").value="";$("#search").value="";render()};render();
 </script>
+<!-- deploy trigger: 2026-09-28 -->
 </body>
 </html>
