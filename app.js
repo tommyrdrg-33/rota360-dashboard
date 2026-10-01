@@ -10,7 +10,7 @@ function renderHeader(){ $('#updated').textContent=meta.updated; $('#period').te
 function renderKPIs(){ $('#kpis').innerHTML=
 KPI('Registros',fmt(meta.records),'rotas consolidadas')+
 KPI('Paradas',fmt(meta.stops_total),'documentadas')+
-KPI('Pacotes',fmt(meta.packages_total),`${meta.routes_with_packages} rotas com contagem`)+
+KPI('Pacotes',fmt(meta.packages_total),`${meta.records} rotas registradas • ${meta.routes_with_packages} com pacotes informados`)+
 KPI('Horário completo',fmt(meta.routes_with_full_time),'rotas')+
 KPI('Mediana',fmt(meta.median_productivity),'paradas/h')+
 KPI('Fase 3',fmt(meta.phase3_records),'registros atuais');}
